@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FadwixAdminBot repositories config",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "defaults": { "$ref": "#/definitions/defaults" },
+    "repos": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/definitions/repo" }
+    }
+  },
+  "required": ["repos"],
+  "definitions": {
+    "event": {
+      "type": "string",
+      "enum": ["commits", "releases", "tags", "pull_requests", "issues"]
+    },
+    "defaults": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "branches": { "type": "array", "items": { "type": "string" } },
+        "events": { "type": "array", "items": { "$ref": "#/definitions/event" } },
+        "ignore_authors": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "repo": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name. This is what appears in a message instead of a link."
+        },
+        "emoji": { "type": "string", "description": "Icon shown before the name" },
+        "owner": { "type": "string", "description": "GitHub owner (user or organisation)" },
+        "repo": { "type": "string", "description": "GitHub repository name" },
+        "branches": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Branches to watch for commits. Omit for the default branch."
+        },
+        "events": { "type": "array", "items": { "$ref": "#/definitions/event" } },
+        "ignore_authors": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Logins whose events are ignored (bots and the like)"
+        },
+        "enabled": { "type": "boolean", "default": true }
+      },
+      "required": ["name", "owner", "repo"]
+    }
+  }
+}

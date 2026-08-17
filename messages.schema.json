@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GitHubPolling message presentation",
+  "description": "Layout, icons and wording of notifications. Every field is optional and overrides the built-in default.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+
+    "divider": {
+      "type": "string",
+      "description": "Rule drawn under the message header. An empty string removes it."
+    },
+    "time_format": {
+      "type": "string",
+      "description": "Go reference-time layout for the footer timestamp, e.g. 02.01.2006 15:04."
+    },
+
+    "show_footer": { "type": "boolean", "description": "Render the timestamp footer." },
+    "show_author": { "type": "boolean", "description": "Render event authors." },
+    "show_labels": { "type": "boolean", "description": "Render issue and pull request labels." },
+    "show_body": { "type": "boolean", "description": "Render release notes." },
+    "expandable_body": { "type": "boolean", "description": "Collapse release notes into an expandable quote." },
+
+    "max_subject_len": { "type": "integer", "minimum": 16, "description": "Character limit for a commit subject." },
+    "max_title_len": { "type": "integer", "minimum": 16, "description": "Character limit for a release, issue or pull request title." },
+    "max_body_len": { "type": "integer", "minimum": 16, "description": "Character limit for release notes." },
+
+    "icons": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Glyphs used in messages. An empty string drops the icon.",
+      "properties": {
+        "repo": { "type": "string" },
+        "commits": { "type": "string" },
+        "bullet": { "type": "string" },
+        "author": { "type": "string" },
+        "labels": { "type": "string" },
+        "branch": { "type": "string" },
+        "time": { "type": "string" },
+        "release": { "type": "string" },
+        "prerelease": { "type": "string" },
+        "tag": { "type": "string" },
+        "pull_request_opened": { "type": "string" },
+        "pull_request_merged": { "type": "string" },
+        "pull_request_closed": { "type": "string" },
+        "pull_request_reopened": { "type": "string" },
+        "issue_opened": { "type": "string" },
+        "issue_closed": { "type": "string" },
+        "issue_reopened": { "type": "string" },
+        "startup": { "type": "string" },
+        "error": { "type": "string" }
+      }
+    },
+
+    "labels": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Wording used in messages.",
+      "properties": {
+        "commits": { "$ref": "#/$defs/plural" },
+        "more_commits": { "$ref": "#/$defs/plural" },
+        "repos": { "$ref": "#/$defs/plural" },
+
+        "more_prefix": { "type": "string" },
+        "no_subject": { "type": "string" },
+
+        "release": { "type": "string" },
+        "prerelease": { "type": "string" },
+        "tag": { "type": "string" },
+
+        "pull_request": { "type": "string" },
+        "pull_request_opened": { "type": "string" },
+        "pull_request_merged": { "type": "string" },
+        "pull_request_closed": { "type": "string" },
+        "pull_request_reopened": { "type": "string" },
+
+        "issue": { "type": "string" },
+        "issue_opened": { "type": "string" },
+        "issue_closed": { "type": "string" },
+        "issue_reopened": { "type": "string" },
+
+        "startup": { "type": "string" },
+        "startup_bot": { "type": "string" },
+        "startup_interval": { "type": "string" },
+        "startup_watching": { "type": "string" },
+
+        "error": { "type": "string" },
+        "error_repo": { "type": "string" }
+      }
+    }
+  },
+
+  "$defs": {
+    "plural": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Noun forms for a count. English uses one and many; Slavic languages also use few (counts ending in 2-4).",
+      "required": ["one", "few", "many"],
+      "properties": {
+        "one": { "type": "string" },
+        "few": { "type": "string" },
+        "many": { "type": "string" }
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "$schema": "./messages.schema.json",
+
+  "labels": {
+    "commits": { "one": "новый коммит", "few": "новых коммита", "many": "новых коммитов" },
+    "more_commits": { "one": "коммит", "few": "коммита", "many": "коммитов" },
+    "repos": { "one": "репозиторий", "few": "репозитория", "many": "репозиториев" },
+
+    "more_prefix": "… и ещё",
+    "no_subject": "(без описания)",
+
+    "release": "Новый релиз",
+    "prerelease": "Пред-релиз",
+    "tag": "Новый тег",
+
+    "pull_request": "pull request",
+    "pull_request_opened": "Открыт",
+    "pull_request_merged": "Влит",
+    "pull_request_closed": "Закрыт",
+    "pull_request_reopened": "Переоткрыт",
+
+    "issue": "задача",
+    "issue_opened": "Создана",
+    "issue_closed": "Закрыта",
+    "issue_reopened": "Переоткрыта",
+
+    "startup": "Мониторинг репозиториев запущен",
+    "startup_bot": "Бот:",
+    "startup_interval": "Интервал опроса:",
+    "startup_watching": "Под наблюдением:",
+
+    "error": "Проблема мониторинга",
+    "error_repo": "Репозиторий:"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "./repos.schema.json",
+
+  "defaults": {
+    "branches": ["main"],
+    "events": ["commits", "releases", "tags", "pull_requests", "issues"]
+  },
+
+  "repos": [
+    {
+      "name": "Core",
+      "emoji": "🧠",
+      "owner": "fadwix",
+      "repo": "core",
+      "branches": ["main", "develop"],
+      "events": ["commits", "releases", "pull_requests"]
+    },
+    {
+      "name": "Mobile app",
+      "emoji": "📱",
+      "owner": "ZOV",
+      "repo": "mobile-app"
+    },
+    {
+      "name": "Landing",
+      "emoji": "🌐",
+      "owner": "ZZZZZ",
+      "repo": "myrepo",
+      "branches": ["main"],
+      "events": ["commits"],
+      "ignore_authors": ["dependabot[bot]", "github-actions[bot]"]
+    },
+    {
+      "name": "Infrastructure",
+      "emoji": "⚙️",
+      "owner": "R",
+      "repo": "infra",
+      "enabled": false
+    }
+  ]
+}

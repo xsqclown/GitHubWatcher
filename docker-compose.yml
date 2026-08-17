@@ -1,0 +1,28 @@
+services:
+  bot:
+    build:
+      context: .
+      args:
+        VERSION: ${VERSION:-dev}
+    image: fadwix-adminbot:latest
+    container_name: fadwix-adminbot
+    restart: unless-stopped
+
+    env_file: [.env]
+    environment:
+      REPOS_CONFIG: /app/repos.json
+      MESSAGES_CONFIG: /app/messages.json
+      STATE_FILE: /data/state.json
+      LOG_FORMAT: json
+
+    volumes:
+      - ./repos.json:/app/repos.json:ro
+      - ./messages.json:/app/messages.json:ro
+      - state:/data
+
+    logging:
+      driver: json-file
+      options: { max-size: "10m", max-file: "3" }
+
+volumes:
+  state:

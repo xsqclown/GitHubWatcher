@@ -1,0 +1,74 @@
+{
+  "$schema": "./messages.schema.json",
+
+  "divider": "─────────────",
+  "time_format": "02.01.2006 15:04",
+
+  "show_footer": true,
+  "show_author": true,
+  "show_labels": true,
+  "show_body": true,
+  "expandable_body": true,
+
+  "max_subject_len": 140,
+  "max_title_len": 180,
+  "max_body_len": 600,
+
+  "icons": {
+    "repo": "📦",
+    "commits": "🔨",
+    "bullet": "▸",
+    "author": "👤",
+    "labels": "🏷",
+    "branch": "🎯",
+    "time": "🕒",
+
+    "release": "🚀",
+    "prerelease": "🧪",
+    "tag": "🏷",
+
+    "pull_request_opened": "🟢",
+    "pull_request_merged": "🟣",
+    "pull_request_closed": "🔴",
+    "pull_request_reopened": "🔄",
+
+    "issue_opened": "🐞",
+    "issue_closed": "✅",
+    "issue_reopened": "🔄",
+
+    "startup": "🤖",
+    "error": "⚠️"
+  },
+
+  "labels": {
+    "commits": { "one": "new commit", "few": "new commits", "many": "new commits" },
+    "more_commits": { "one": "commit", "few": "commits", "many": "commits" },
+    "repos": { "one": "repository", "few": "repositories", "many": "repositories" },
+
+    "more_prefix": "… and",
+    "no_subject": "(no message)",
+
+    "release": "New release",
+    "prerelease": "Pre-release",
+    "tag": "New tag",
+
+    "pull_request": "pull request",
+    "pull_request_opened": "Opened",
+    "pull_request_merged": "Merged",
+    "pull_request_closed": "Closed",
+    "pull_request_reopened": "Reopened",
+
+    "issue": "issue",
+    "issue_opened": "Opened",
+    "issue_closed": "Closed",
+    "issue_reopened": "Reopened",
+
+    "startup": "Repository monitoring started",
+    "startup_bot": "Bot:",
+    "startup_interval": "Poll interval:",
+    "startup_watching": "Watching:",
+
+    "error": "Monitoring problem",
+    "error_repo": "Repository:"
+  }
+}
