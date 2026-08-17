@@ -53,7 +53,7 @@ func run(envPath string, checkOnly, resetState bool) error {
 	}
 
 	log := newLogger(cfg.LogLevel, cfg.LogFormat)
-	log.Info("starting FadwixAdminBot", "version", version, "config", cfg.Redacted())
+	log.Info("starting GitHubWatcher", "version", version, "config", cfg.Redacted())
 
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer stop()
