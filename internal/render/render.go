@@ -189,7 +189,14 @@ func (r *Renderer) issue(e model.Event) string {
 }
 
 func (r *Renderer) head(b *strings.Builder, ref model.RepoRef, branch string) {
-	head := withIcon(r.m.Icons.Repo, "<b>"+esc(ref.Title())+"</b>")
+	// A repository that brings its own emoji uses it instead of the generic
+	// repository icon, so the header never carries two icons at once.
+	icon := ref.Emoji
+	if icon == "" {
+		icon = r.m.Icons.Repo
+	}
+
+	head := withIcon(icon, "<b>"+esc(ref.Name)+"</b>")
 	if branch != "" {
 		head += " · <code>" + esc(branch) + "</code>"
 	}

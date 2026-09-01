@@ -72,7 +72,7 @@ func TestCommitsRenderWithoutLinks(t *testing.T) {
 
 	out := r.Event(ev)
 
-	for _, want := range []string{"🧠 Core", "<code>main</code>", "2 new commits", "<code>abcdef1</code>", "feat: referrals", "<i>ivan</i>", "16.08.2026 14:32"} {
+	for _, want := range []string{"🧠 <b>Core</b>", "<code>main</code>", "2 new commits", "<code>abcdef1</code>", "feat: referrals", "<i>ivan</i>", "16.08.2026 14:32"} {
 		if !strings.Contains(out, want) {
 			t.Errorf("output does not contain %q:\n%s", want, out)
 		}
@@ -163,7 +163,7 @@ func TestRenderAllEventKinds(t *testing.T) {
 					t.Errorf("output does not contain %q:\n%s", want, out)
 				}
 			}
-			if !strings.Contains(out, "🧠 Core") {
+			if !strings.Contains(out, "🧠 <b>Core</b>") {
 				t.Errorf("the header must carry the repository name:\n%s", out)
 			}
 		})
@@ -224,5 +224,49 @@ func TestCustomMessagesOverrideDefaults(t *testing.T) {
 	}
 	if strings.HasPrefix(out, " ") {
 		t.Errorf("an empty icon must not leave a leading space:\n%s", out)
+	}
+}
+
+// TestHeaderCarriesASingleIcon pins the fix for a header that used to show the
+// generic repository icon and the repository's own emoji next to each other,
+// rendering as "📦 🏴 Anarchy Server Core".
+func TestHeaderCarriesASingleIcon(t *testing.T) {
+	r := testRenderer()
+
+	cases := []struct {
+		name string
+		repo model.RepoRef
+		want string
+	}{
+		{
+			name: "the repository emoji replaces the generic icon",
+			repo: model.RepoRef{Name: "Anarchy Server Core", Emoji: "🏴"},
+			want: "🏴 <b>Anarchy Server Core</b>",
+		},
+		{
+			name: "a repository without an emoji falls back to the generic icon",
+			repo: model.RepoRef{Name: "Core"},
+			want: "📦 <b>Core</b>",
+		},
+	}
+
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			out := r.Event(model.Event{
+				Kind:    model.KindCommits,
+				Repo:    tc.repo,
+				Branch:  "main",
+				Commits: []model.Commit{{SHA: "abcdef1234567890", Message: "feat: thing", Author: "ivan"}},
+				At:      time.Date(2026, 9, 1, 12, 0, 0, 0, time.UTC),
+			})
+
+			if !strings.Contains(out, tc.want) {
+				t.Fatalf("header does not read %q:\n%s", tc.want, out)
+			}
+
+			if strings.Contains(out, "📦 🏴") {
+				t.Fatalf("the header carries two icons:\n%s", out)
+			}
+		})
 	}
 }

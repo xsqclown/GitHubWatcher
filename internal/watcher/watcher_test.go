@@ -183,7 +183,7 @@ func TestNewCommitsArePublished(t *testing.T) {
 	if strings.Contains(msgs[0], "old") {
 		t.Errorf("an already-published commit was repeated:\n%s", msgs[0])
 	}
-	if !strings.Contains(msgs[0], "🧠 Core") {
+	if !strings.Contains(msgs[0], "🧠 <b>Core</b>") {
 		t.Errorf("the repository name is missing:\n%s", msgs[0])
 	}
 	if strings.Contains(msgs[0], "acme/core") {
